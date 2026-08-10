@@ -36,7 +36,9 @@ def retrieve_context(query, document):
 
     scored_sections.sort(reverse=True, key=lambda item: item[0])
 
-    return "\n\n".join(section for _, section in scored_sections[:3])
+    return "\n\n".join(
+        section for _, section in scored_sections[:TOP_K_RESULTS]
+    )
 
 
 # Generate a response using retrieved context
@@ -55,7 +57,7 @@ def generate_response(query, context):
 # Complete RAG pipeline
 def rag_pipeline(query):
     """Run retrieval and response generation."""
-    data_path = Path(__file__).parent.parent / "data" / "processed" / "cleaned_educational_resources.md"
+    data_path = Path(__file__).parent.parent / DATA_PATH
 
     document = load_documents(data_path)
     context = retrieve_context(query, document)
