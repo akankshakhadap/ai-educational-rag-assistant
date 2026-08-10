@@ -4,6 +4,7 @@ Basic Retrieval-Augmented Generation pipeline.
 """
 
 from pathlib import Path
+from config import DATA_PATH, TOP_K_RESULTS
 
 
 # Load educational resources
